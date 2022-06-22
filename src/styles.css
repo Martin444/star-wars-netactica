@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Pathway+Gothic+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,500;0,700;0,900;1,100;1,300;1,500&display=swap');
+
+:root {
+    --background-color: #020203;
+    --action-color: #ba4645;
+    --second-action: #7d82ce;
+    --grey-color: #bcbbbd;
+}
+
+body {
+    margin: 0;
+}
