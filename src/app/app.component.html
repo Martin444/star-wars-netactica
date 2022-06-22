@@ -2,12 +2,7 @@
   <h1>Loading...</h1>
 </div>
 <div *ngIf="!isLoadingFilms">
-  <h1>All Films {{allFIlmes.length}}</h1>
-  <div>
-    <ul>
-      <li *ngFor="let film of allFIlmes ">{{film.title}}</li>
-    </ul>
-  </div>
+  <home-page [allFilmes]="allFIlmes"></home-page>
 </div>
 
 
@@ -32,6 +27,8 @@
     margin: auto;
     align-items: center;
     align-self: center;
+    font-family: 'Roboto';
+    font-weight: 300;
 
   }
 </style>
