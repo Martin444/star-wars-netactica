@@ -1,6 +1,20 @@
-<h1>All Films {{allFilmes.length}}</h1>
-<div>
-  <ul>
-    <li *ngFor="let film of allFilmes ">{{film.title}}</li>
+<div class="title">
+  <h4>All the</h4>
+  <h1>Films {{allFilmes.length}}</h1>
+</div>
+<div class="container-list">
+  <ul *ngFor="let film of allFilmes" class="list-film">
+    <app-film-tile [filmInfo]="film"></app-film-tile>
   </ul>
 </div>
+
+<style>
+
+  .container-list {
+    display: grid;
+    gap: 1rem;
+    grid-template-rows: repeat(auto-fill, minmax(minmax(min(17rem, 100%)), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr));
+  }
+
+</style>

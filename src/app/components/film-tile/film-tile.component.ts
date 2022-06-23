@@ -1,11 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Filme } from 'src/app/models/films.model';
 
 @Component({
   selector: 'app-film-tile',
   templateUrl: './film-tile.component.html',
-  styleUrls: ['./film-tile.component.css']
 })
 export class FilmTileComponent implements OnInit {
+
+    
+  @Input() filmInfo: Filme = {
+    title: '',
+    episode_id: '',
+    director: '',
+    opening_crawl: '',
+    characters: []
+  };
 
   constructor() { }
 
