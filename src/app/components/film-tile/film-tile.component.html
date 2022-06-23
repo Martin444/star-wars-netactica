@@ -1,1 +1,29 @@
-<p>film-tile works!</p>
+<div>
+    <div class="film-container">
+        <div class="film_heading">
+            <h2>{{filmInfo.title}}</h2>
+            <span>Episode {{filmInfo.episode_id}}</span>
+        </div>
+        <div>
+            <h3>Direct by {{filmInfo.director}}</h3>
+            <a href="#">See cast</a>
+        </div>
+        <div>
+            <span>{{filmInfo.opening_crawl}}</span>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .film-container {
+        border: dashed 0.5px;
+        padding: 10px;
+    }
+
+    .film-container:hover {
+        box-shadow: 0px 0 10px 5px rgba(255, 255, 255, 0.349);
+    }
+
+    
+</style>
