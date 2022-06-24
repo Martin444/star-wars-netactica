@@ -1,14 +1,13 @@
 <div>
     <div class="film-container">
         <div class="film_heading">
-            <h2>{{filmInfo.title}}</h2>
-            <span>Episode {{filmInfo.episode_id}}</span>
+            <h2>{{filmInfo.title}} <span>Episode {{filmInfo.episode_id}}</span></h2>
         </div>
-        <div>
+        <div class="director">
             <h3>Direct by {{filmInfo.director}}</h3>
-            <a href="#">See cast</a>
+            <a href="#">View cast</a>
         </div>
-        <div>
+        <div class="crawl-container">
             <span>{{filmInfo.opening_crawl}}</span>
         </div>
     </div>
@@ -17,13 +16,48 @@
 
 <style>
     .film-container {
-        border: dashed 0.5px;
-        padding: 10px;
+        border: solid .2px rgba(255, 255, 255, 0.4);
+        padding: 20px;
+        border-radius: 5px;
     }
 
     .film-container:hover {
-        box-shadow: 0px 0 10px 5px rgba(255, 255, 255, 0.349);
+        transition: all .2s ease-in-out;
+        transform: translateY(3px);
+        box-shadow: 0px 0 10px 5px rgba(255, 255, 255, 0.3);
     }
 
-    
+    .film_heading{
+        margin: 0;
+
+    }
+
+    .film_heading h2 {
+        flex: 3;
+        margin: 0;
+    }
+
+    .film_heading span {
+        flex: 2;
+        font-size: 15px;
+        white-space: nowrap;
+        font-weight: 300;
+    }
+
+    .director h3{
+        font-weight: 300;
+    }
+
+    .director a{
+        font-size: 18pt;
+        font-weight: 700;
+        color: var(--action-color);
+    }
+
+    .crawl-container {
+        overflow: hidden;
+        height: 0px;
+    }
+
+
 </style>

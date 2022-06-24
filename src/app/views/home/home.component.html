@@ -1,20 +1,60 @@
-<div class="title">
-  <h4>All the</h4>
-  <h1>Films {{allFilmes.length}}</h1>
+<div class="container-app">
+  <div class="title">
+    <h4>All the</h4>
+    <h1>Films</h1>
+  </div>
+  <div class="container-list">
+    <div *ngFor="let film of allFilmes" class="list-film">
+      <app-film-tile [filmInfo]="film"></app-film-tile>
+    </div>
+  </div>
+  
 </div>
-<div class="container-list">
-  <ul *ngFor="let film of allFilmes" class="list-film">
-    <app-film-tile [filmInfo]="film"></app-film-tile>
-  </ul>
-</div>
-
 <style>
 
+  .container-app {
+    height: 100%;
+    display: flex;
+  }
+
   .container-list {
+    height: 100%;
+    flex: 10;
     display: grid;
-    gap: 1rem;
-    grid-template-rows: repeat(auto-fill, minmax(minmax(min(17rem, 100%)), 1fr));
+    gap: 1em;
+    padding: 0;
+    grid-template-rows: repeat(auto-fit, minmax(10rem, 13em));
     grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr));
+  }
+
+  .title {
+    flex: 1;
+    margin-right: 40px;
+  }
+  
+
+  .title h4 {
+    font-size: clamp(27pt, 3em, 20%);
+    font-weight: 300;
+    margin: 0;
+  }
+
+  .title h1 {
+    font-weight: 900;
+    margin: 0;
+  }
+
+  @media (max-width: 600px) {
+    .container-app {
+      display: block;
+      height: fit-content;
+    }
+
+    .title {
+      flex: 1;
+      margin-bottom: 40px;
+    }
+  
   }
 
 </style>
