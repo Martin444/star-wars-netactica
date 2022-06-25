@@ -1,15 +1,25 @@
 <div>
-    <div class="film-container">
+    <div class="film-container" (click)="selectedFilmCrawl(filmInfo.episode_id)">
         <div class="film_heading">
-            <h2>{{filmInfo.title}} <span>Episode {{filmInfo.episode_id}}</span></h2>
+            <h2>{{filmInfo.title}}</h2>
         </div>
         <div class="director">
             <h3>Direct by {{filmInfo.director}}</h3>
             <a href="#">View cast</a>
         </div>
-        <div class="crawl-container">
-            <span>{{filmInfo.opening_crawl}}</span>
-        </div>
+        <section *ngIf="isCrawled">
+            <div class="crawl-container">
+                
+                <span><h3>Episode {{int2roman(filmInfo.episode_id)}}</h3> {{filmInfo.opening_crawl}}</span>
+            </div>
+        </section>
+        <section *ngIf="!isCrawled">
+            <div class="crawl-container-hidden">
+                <h1>Episode</h1> 
+                <span>{{filmInfo.opening_crawl}}</span>
+            </div>
+        </section>
+
     </div>
 </div>
 
@@ -53,11 +63,58 @@
         font-weight: 700;
         color: var(--action-color);
     }
-
-    .crawl-container {
+    .crawl-container-hidden {
         overflow: hidden;
         height: 0px;
+        width: 100%;
     }
 
+    /* .crawl-container {
+        overflow-y: scroll;
+        height: 10em;
+        margin: 0px 0pc;
+
+    } */
+
+
+    .crawl-container {
+        overflow-y: hidden;
+        justify-content: center;
+        align-self: center;
+        height: 20em;
+        display: flex;
+        margin: 0px 0pc;
+        text-align: justify;
+        transform: rotateX(60deg)  translateZ(0);
+        perspective: 400px;
+    }
+    
+    .crawl-container span {
+        font-family: 'Pathway Gothic One', sans-serif;
+        color: #feda4a;
+        font-size: 300%;
+        font-weight: 600;
+        letter-spacing: 6px;
+        line-height: 150%;
+        position: relative;
+        text-transform: uppercase;
+        transform-origin: 50% 100%;
+        animation: crawl 260s linear;
+    }
+    .crawl-container h3 {
+        text-align: center;
+    }
+
+
+    @keyframes crawl {
+    0% {
+        top: 200px;
+        transform: rotateX(20deg)  translateZ(0);
+    }
+    100% {
+        top: -6000px;
+        transform: rotateX(100deg) translateZ(-2500px);
+    }
+}
 
 </style>

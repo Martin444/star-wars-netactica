@@ -9,7 +9,21 @@ export class HomeComponent implements OnInit {
 
   @Input() allFilmes: Filme[] = []
 
+  thisCrawl = '0';
+
+  changeCrawl(epid: string) {
+    if(epid === this.thisCrawl) {
+      console.log(epid)
+      this.thisCrawl = '0'
+    } else {
+      this.thisCrawl = epid;
+    }
+  }
+
+
   constructor() { }
+
+
 
   ngOnInit(): void {
   }

@@ -5,11 +5,18 @@
   </div>
   <div class="container-list">
     <div *ngFor="let film of allFilmes" class="list-film">
-      <app-film-tile [filmInfo]="film"></app-film-tile>
+      <app-film-tile
+        [filmInfo]="film" 
+        (isSelectEpisodie)="changeCrawl($event)" 
+        [isCrawled]="thisCrawl == film.episode_id"
+        >
+      </app-film-tile>
     </div>
   </div>
   
 </div>
+
+
 <style>
 
   .container-app {
@@ -18,18 +25,18 @@
   }
 
   .container-list {
-    height: 100%;
     flex: 10;
     display: grid;
     gap: 1em;
     padding: 0;
-    grid-template-rows: repeat(auto-fit, minmax(10rem, 13em));
+    grid-template-rows: repeat(auto-fill, minmax(10rem, 100%));
     grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr));
   }
 
   .title {
     flex: 1;
     margin-right: 40px;
+    position: sticky;
   }
   
 
