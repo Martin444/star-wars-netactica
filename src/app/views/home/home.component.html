@@ -1,4 +1,8 @@
-<div class="container-app">
+<div *ngIf="isLoadingFilms" class="load-cnt">
+  <h1>Loading...</h1>
+</div>
+
+<div *ngIf="!isLoadingFilms" class="container-app">
   <div class="title">
     <h4>All the</h4>
     <h1>Films</h1>
@@ -13,8 +17,8 @@
       </app-film-tile>
     </div>
   </div>
-  
 </div>
+
 
 
 <style>
@@ -50,6 +54,25 @@
     font-weight: 900;
     margin: 0;
   }
+
+
+  .load-cnt {
+    display: flex;
+    margin: auto;
+    height: calc(100vh - 40px);
+    width: calc(100vw - 90px);
+  }
+  
+  .load-cnt h1 {
+    margin: auto;
+    width: 100%;
+    text-align: center;
+    font-family: 'Roboto';
+    font-weight: 300;
+    justify-content: center;
+  }
+
+
 
   @media (max-width: 600px) {
     .container-app {

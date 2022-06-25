@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Filme } from 'src/app/models/films.model';
+import { SettingsService } from 'src/app/services/settings.service';
 
 @Component({
   selector: 'app-film-tile',
@@ -13,7 +14,8 @@ export class FilmTileComponent implements OnInit {
     episode_id: '',
     director: '',
     opening_crawl: '',
-    characters: []
+    characters: [],
+    url: ''
   };
 
   @Input() isCrawled = false;
@@ -25,41 +27,14 @@ export class FilmTileComponent implements OnInit {
     this.isSelectEpisodie.emit(ep);
   }
 
-   int2roman = (ep: string): string => {
+  constructor(
+    private settingService: SettingsService,
+  ) { }
 
-    let original = Number(ep);
-
-    if (original < 1 || original > 3999) {
-      throw new Error('Error: Input integer limited to 1 through 3,999');
-    }
-  
-    const numerals = [
-      ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'], // 1-9
-      ['X', 'XX', 'XXX', 'XL', 'L', 'LX', 'LXX', 'LXXX', 'XC'], // 10-90
-      ['C', 'CC', 'CCC', 'CD', 'D', 'DC', 'DCC', 'DCCC', 'CM'], // 100-900
-      ['M', 'MM', 'MMM'], // 1000-3000
-    ];
-  
-    // TODO: Could expand to support fractions, simply rounding for now
-    const digits = Math.round(original).toString().split('');
-    let position = (digits.length - 1);
-  
-    return digits.reduce((roman, digit) => {
-      if (digit !== '0') {
-        roman += numerals[position][parseInt(digit) - 1];
-      }
-  
-      position -= 1;
-  
-      return roman;
-    }, '');
+  convertRoman(num: string) {
+    return this.settingService.int2roman(num)
   }
 
-  constructor() { }
-
-  ngOnChanges(): void {
-
-  }
 
   ngOnInit(): void {
   }

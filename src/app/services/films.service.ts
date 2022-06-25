@@ -14,4 +14,8 @@ export class FilmsService {
   getAllFilms() {
     return this.http.get(this.url)
   }
+
+  getOneFilm(ep: string) {
+    return this.http.get(`${this.url}/${ep}`)
+  }
 }

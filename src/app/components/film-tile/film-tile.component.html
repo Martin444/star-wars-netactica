@@ -5,12 +5,11 @@
         </div>
         <div class="director">
             <h3>Direct by {{filmInfo.director}}</h3>
-            <a href="#">View cast</a>
+            <a [routerLink]="['/cast',filmInfo.url.substring(27)]" routerLinkActive="active" ariaCurrentWhenActive="page">View cast</a>
         </div>
         <section *ngIf="isCrawled">
             <div class="crawl-container">
-                
-                <span><h3>Episode {{int2roman(filmInfo.episode_id)}}</h3> {{filmInfo.opening_crawl}}</span>
+                <span><h3>Episode {{convertRoman(filmInfo.episode_id)}}</h3> {{filmInfo.opening_crawl}}</span>
             </div>
         </section>
         <section *ngIf="!isCrawled">
@@ -19,7 +18,6 @@
                 <span>{{filmInfo.opening_crawl}}</span>
             </div>
         </section>
-
     </div>
 </div>
 
@@ -63,19 +61,12 @@
         font-weight: 700;
         color: var(--action-color);
     }
+
     .crawl-container-hidden {
         overflow: hidden;
         height: 0px;
         width: 100%;
     }
-
-    /* .crawl-container {
-        overflow-y: scroll;
-        height: 10em;
-        margin: 0px 0pc;
-
-    } */
-
 
     .crawl-container {
         overflow-y: hidden;
@@ -101,10 +92,10 @@
         transform-origin: 50% 100%;
         animation: crawl 260s linear;
     }
+
     .crawl-container h3 {
         text-align: center;
     }
-
 
     @keyframes crawl {
     0% {

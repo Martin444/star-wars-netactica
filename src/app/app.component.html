@@ -1,12 +1,9 @@
-<div *ngIf="isLoadingFilms == true" class="load-cnt">
-  <h1>Loading...</h1>
-</div>
-<div *ngIf="!isLoadingFilms">
-  <home-page [allFilmes]="allFIlmes"></home-page>
+
+<div>  
+  <router-outlet></router-outlet>
 </div>
 
 <style>
-
   * {
     color: white;
     margin: 0;
