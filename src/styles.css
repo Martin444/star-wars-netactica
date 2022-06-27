@@ -10,8 +10,9 @@
 }
 
 body {
-    margin: 0;
+    margin: 0 auto;
     font-family: 'Roboto';
     background-color: var(--background-color);
-
+    color: white;
+    padding: 20px 20px;
 }

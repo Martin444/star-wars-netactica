@@ -1,1 +1,84 @@
-<p>cast works!</p>
+<div *ngIf="isLoadPeople" class="load-cnt">
+    <h1>Loading...</h1>
+</div>
+<div *ngIf="!isLoadPeople" class="castel">
+    <div class="title">
+        <h4>All the</h4>
+        <h1>Cast</h1>
+    </div>
+        <div class="container-list">
+            <div *ngFor="let people of listCast.slice(0,10)">
+                <app-character-tile [characterize]='people'></app-character-tile>
+            </div>
+            <button class="btn-more">Ver mas</button>
+        </div>
+</div>
+
+
+<style>
+
+    .castel {
+        /* width: 100vh; */
+        display: flex;
+        padding: 0;
+    }
+
+    .title {
+        flex: 1;
+        margin-right: 40px;
+        position: sticky;
+    }
+
+    .title h4 {
+        font-size: clamp(27pt, 3em, 20%);
+        font-weight: 300;
+        margin: 0;
+    }
+
+    .title h1 {
+        font-weight: 900;
+        margin: 0;
+    }
+
+    .btn-more {
+        background-color: transparent;
+        border: solid .2px rgba(255, 255, 255, 0.4);
+        color: white;
+        font-size: 18pt;
+        cursor: pointer;
+    }
+    .btn-more:active {
+        transition: all 0.1s ease-in-out;
+        transform: translateY(3px);
+        box-shadow: 0px 0 4px 5px rgba(255, 255, 255, 0.3);
+    }
+
+    
+    .container-list {
+        flex: 10;
+        display: grid;
+        padding: 0;
+        gap: 1em;
+        grid-template-rows: repeat(auto-fill, minmax(17em, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
+    }
+
+
+    .load-cnt {
+        display: flex;
+        margin: auto;
+        height: calc(100vh - 40px);
+        width: calc(100vw - 90px);
+    }
+    
+    .load-cnt h1 {
+        margin: auto;
+        width: 100%;
+        text-align: center;
+        font-family: 'Roboto';
+        font-weight: 300;
+        justify-content: center;
+    }
+
+    
+</style>
