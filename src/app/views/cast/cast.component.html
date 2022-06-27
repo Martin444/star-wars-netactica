@@ -7,10 +7,10 @@
         <h1>Cast</h1>
     </div>
         <div class="container-list">
-            <div *ngFor="let people of listCast.slice(0,10)">
+            <div *ngFor="let people of listCast.slice(0,fristCharacters)">
                 <app-character-tile [characterize]='people'></app-character-tile>
             </div>
-            <button class="btn-more">Ver mas</button>
+            <button *ngIf="listCast.length != fristCharacters" class="btn-more" (click)="seeMore()">more ({{fristCharacters}} of {{listCast.length}})</button>
         </div>
 </div>
 
@@ -59,7 +59,7 @@
         display: grid;
         padding: 0;
         gap: 1em;
-        grid-template-rows: repeat(auto-fill, minmax(17em, 1fr));
+        grid-template-rows: repeat(auto-fill, minmax(10em, 1fr));
         grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
     }
 

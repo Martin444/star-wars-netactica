@@ -1,20 +1,30 @@
 <div class="people-container">
-    <div>
+    <div class="people-info">
         <h1>{{characterize?.name}}</h1>
         <p>Color eyes: {{characterize?.eye_color}}</p>
-        <button>View relationated films</button>
-        <p>Films relationated: {{characterize?.films?.length}}</p>
-        <br>
+        <a href="">View {{characterize?.films?.length}} participations</a>
     </div>
     <span>{{characterize?.gender}}</span>
 </div>
 
 <style>
+
     .people-container {
         padding: 20px;
         display: flex;
         justify-content: space-between;
         border: solid .2px rgba(255, 255, 255, 0.4);
+    }
+
+    .people-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+    }
+
+    .people-info h1{
+        margin: 0;
     }
 
     .people-container:hover {
@@ -23,8 +33,11 @@
         box-shadow: 0px 0 10px 5px rgba(255, 255, 255, 0.3);
     }
 
-    button {
+    a {
+        font-size: 14pt;
         white-space: nowrap;
+        font-weight: 700;
+        color: var(--action-color);
     }
 
     .people-container:hover button {
@@ -32,4 +45,5 @@
         transform: translateY(3px);
         box-shadow: 0px 0 10px 5px rgba(255, 255, 255, 0.3);
     }
+
 </style>

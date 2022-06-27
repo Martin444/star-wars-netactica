@@ -22,6 +22,8 @@ export class CastComponent implements OnInit {
 
   listCast: People[] = [];
   isLoadPeople = true;
+  fristCharacters = 10;
+
 
   constructor(
     private castService: CastService,
@@ -45,5 +47,14 @@ export class CastComponent implements OnInit {
     console.log(resp)
   }
 
-  
+
+  seeMore() {
+    let resume = this.listCast.length - this.fristCharacters;
+    if (resume > 10) {
+      this.fristCharacters += 10;
+    } else {
+      this.fristCharacters += resume;
+    }
+    console.log(resume);
+  }
 }
