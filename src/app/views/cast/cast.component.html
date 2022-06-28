@@ -7,6 +7,7 @@
             <h4>All the</h4>
             <h1>Cast of {{filmSelect.title}}</h1>
         </div>
+        <!-- Filtros -->
         <form class="filters" [target]="filterForm" (submit)="getFilterValues()">
             <div class="filter">
                 <h5>color eyes: </h5>
@@ -44,11 +45,20 @@
             <button type="submit">Filter</button>
         </form>
     </div>
-        <div class="container-list">
+        <div class="container-list" *ngIf="filterCast.length === 0">
             <div *ngFor="let people of listCast.slice(0,fristCharacters)">
                 <app-character-tile [characterize]='people'></app-character-tile>
             </div>
             <button *ngIf="listCast.length != fristCharacters" class="btn-more" (click)="seeMore()">load more ({{fristCharacters}} of {{listCast.length}})</button>
+        </div>
+        <div *ngIf="filterCast.length !== 0">
+            <h3>{{resultsFilterTitle}}</h3>
+            <div class="container-list" >
+                <div *ngFor="let people of filterCast.slice(0,fristCharacters)">
+                    <app-character-tile [characterize]='people'></app-character-tile>
+                </div>
+                <button *ngIf="filterCast.length >= fristCharacters" class="btn-more" (click)="seeMore()">load more ({{fristCharacters}} of {{filterCast.length}})</button>
+            </div>
         </div>
 </div>
 

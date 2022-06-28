@@ -23,10 +23,12 @@ export class CastComponent implements OnInit {
   };
 
   listCast: People[] = [];
+  filterCast: People[] = [];
   isLoadPeople = true;
   fristCharacters = 10;
 
   filterForm!:FormGroup;
+  resultsFilterTitle: string = 'Results';
 
   filterEye = 'All';
   filterGener = 'All';
@@ -63,20 +65,24 @@ export class CastComponent implements OnInit {
   }
 
   getFilterValues() {
-    
     if(this.filterFilm === this.filmSelect.title) {
         let respon = this.listCast.filter((people) => {
           if (this.filterEye === 'All' && this.filterGener === 'All') {
             return people;
           } else if (this.filterEye === 'All' && this.filterGener !== 'All') {
-            return people.eye_color === this.filterGener && people
+            return people.gender === this.filterGener;
           } else if (this.filterEye !== 'All' && this.filterGener === 'All') {
-            return people.eye_color === this.filterEye && people
+            return people.eye_color === this.filterEye
           } else {
-            return people.eye_color === this.filterEye && people.gender === this.filterGener
+            if(people.eye_color.includes(this.filterEye) && people.gender.includes(this.filterGener)){
+              return people.eye_color.includes(this.filterEye) && people.gender.includes(this.filterGener)
+            } else {
+              this.resultsFilterTitle = 'Characters not found, Sorry. try again!'
+              return people;
+            }
           }
         });
-        console.log(respon)
+        this.filterCast = respon;
     } else {
       this.isLoadPeople = true;
       this.getCastByNameEp(this.filterFilm);
