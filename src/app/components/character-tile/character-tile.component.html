@@ -2,7 +2,7 @@
     <div class="people-info">
         <h1>{{characterize?.name}}</h1>
         <p>Color eyes: {{characterize?.eye_color}}</p>
-        <a href="">View {{characterize?.films?.length}} participations</a>
+        <a (click)="openFilmsOfCharacter(characterize!)">View {{characterize?.films?.length}} participations</a>
     </div>
     <span>{{characterize?.gender}}</span>
 </div>

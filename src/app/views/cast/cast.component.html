@@ -1,6 +1,11 @@
 <div *ngIf="isLoadPeople" class="load-cnt">
     <h1>Loading...</h1>
 </div>
+<app-modal 
+    [isOpen]="isOpenModal" 
+    [peopleSelected]="peopleSelected"
+    [films]="filmsOfCharacterSelected"
+    (isClosed)="openModal($event)"></app-modal>
 <div *ngIf="!isLoadPeople" class="castel">
     <div class="title">
         <div>
@@ -47,7 +52,11 @@
     </div>
         <div class="container-list" *ngIf="filterCast.length === 0">
             <div *ngFor="let people of listCast.slice(0,fristCharacters)">
-                <app-character-tile [characterize]='people'></app-character-tile>
+                <app-character-tile 
+                    [characterize]='people' 
+                    (isOpenModal)="openModal($event)"
+                    (peopleSelected)="selectPeople($event)"
+                    ></app-character-tile>
             </div>
             <button *ngIf="listCast.length != fristCharacters" class="btn-more" (click)="seeMore()">load more ({{fristCharacters}} of {{listCast.length}})</button>
         </div>
@@ -66,7 +75,6 @@
 <style>
 
     .castel {
-        /* width: 100vh; */
         display: block;
         padding: 0;
     }
@@ -110,6 +118,7 @@
         justify-content: start;
         align-self: end;
     }
+
     .filter{
         display: flex;
         margin: 0px 10px;
@@ -155,6 +164,32 @@
         font-family: 'Roboto';
         font-weight: 300;
         justify-content: center;
+    }
+
+
+    @media (max-width: 1200px) {
+        .title {
+            flex-direction: column;
+            align-items: flex-start;
+            align-self: start;
+            align-content: flex-start;
+            justify-content: start;
+        }
+
+        .filters{
+            padding: 20px 0px;
+            align-self: start;
+        }
+
+        .filter{
+            flex-direction: column;
+            margin: 0;
+            margin-right: 10px;
+        }
+
+        .filter h5{
+            margin: 5px 0px;
+        }
     }
 
     

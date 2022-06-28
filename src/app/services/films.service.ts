@@ -22,4 +22,12 @@ export class FilmsService {
   getFilmbyName(ep: string) {
     return this.http.get(`${this.url}/?search=${ep}`)
   }
+
+  getOneFilmeURL(url: string) {
+    return new Promise<any>((res, rej) => {
+      this.http.get(url).subscribe(response => {
+        res(response)
+      })
+    })
+  }
 }

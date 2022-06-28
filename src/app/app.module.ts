@@ -9,6 +9,7 @@ import { FilmTileComponent } from './components/film-tile/film-tile.component';
 import { CharacterTileComponent } from './components/character-tile/character-tile.component';
 import { CastComponent } from './views/cast/cast.component';
 import { FormsModule } from '@angular/forms';
+import { ModalComponent } from './components/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { FormsModule } from '@angular/forms';
     HomeComponent,
     FilmTileComponent,
     CharacterTileComponent,
-    CastComponent
+    CastComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,

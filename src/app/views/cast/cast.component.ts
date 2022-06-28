@@ -4,6 +4,7 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Filme } from 'src/app/models/films.model';
 import { People } from 'src/app/models/people.model';
 import { CastService } from 'src/app/services/cast.service';
+import { FilmsService } from 'src/app/services/films.service';
 
 @Component({
   selector: 'app-cast',
@@ -27,6 +28,8 @@ export class CastComponent implements OnInit {
   isLoadPeople = true;
   fristCharacters = 10;
 
+
+
   filterForm!:FormGroup;
   resultsFilterTitle: string = 'Results';
 
@@ -35,8 +38,36 @@ export class CastComponent implements OnInit {
   filterFilm = this.filmSelect.title;
 
 
+  // iS OPEN MODAL
+  isOpenModal = false;
+  peopleSelected!: People;
+  filmsOfCharacterSelected!: Filme[];
+
+  openModal(value: boolean) {
+    this.isOpenModal = value;
+  }
+
+  selectPeople(people: People) {
+    this.peopleSelected = people;
+    this.getFilmsOfCharacter();
+  }
+
+  async getFilmsOfCharacter() {
+    let filmsResponse = new Promise<Filme[]>((resolve, reject) => {
+      let tempFilms:Filme[] = []
+      this.peopleSelected.films.forEach( async (film) => {
+          let films = await this.filmService.getOneFilmeURL(film);
+          tempFilms.push(films);
+        });
+        resolve(tempFilms);
+    });
+    this.filmsOfCharacterSelected = await filmsResponse;
+  }
+
+
   constructor(
     private castService: CastService,
+    private filmService: FilmsService,
     private route: ActivatedRoute,
   ) {
 
@@ -74,7 +105,7 @@ export class CastComponent implements OnInit {
           } else if (this.filterEye !== 'All' && this.filterGener === 'All') {
             return people.eye_color === this.filterEye
           } else {
-            if(people.eye_color.includes(this.filterEye) && people.gender.includes(this.filterGener)){
+            if(people.eye_color.includes(this.filterEye) && people.gender.includes(this.filterGener)) {
               return people.eye_color.includes(this.filterEye) && people.gender.includes(this.filterGener)
             } else {
               this.resultsFilterTitle = 'Characters not found, Sorry. try again!'
