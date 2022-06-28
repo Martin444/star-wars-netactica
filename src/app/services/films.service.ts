@@ -18,4 +18,8 @@ export class FilmsService {
   getOneFilm(ep: string) {
     return this.http.get(`${this.url}/${ep}`)
   }
+
+  getFilmbyName(ep: string) {
+    return this.http.get(`${this.url}/?search=${ep}`)
+  }
 }

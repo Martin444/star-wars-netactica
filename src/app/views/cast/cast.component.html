@@ -3,14 +3,52 @@
 </div>
 <div *ngIf="!isLoadPeople" class="castel">
     <div class="title">
-        <h4>All the</h4>
-        <h1>Cast</h1>
+        <div>
+            <h4>All the</h4>
+            <h1>Cast of {{filmSelect.title}}</h1>
+        </div>
+        <form class="filters" [target]="filterForm" (submit)="getFilterValues()">
+            <div class="filter">
+                <h5>color eyes: </h5>
+                <select [(ngModel)]="filterEye" name="filterEye" >
+                    <option value="All">All</option>
+                    <option value="yellow">yellow</option>
+                    <option value="red">red</option>
+                    <option value="blue-gray">blue-gray</option>
+                    <option value="orange">orange</option>
+                    <option value="brown">brown</option>
+                </select>
+            </div>
+            <div class="filter">
+                <h5>gener: </h5>
+                <select [(ngModel)]="filterGener" name="gener">
+                    <option value="All">All</option>
+                    <option value="n/a">n/a</option>
+                    <option value="male">male</option>
+                    <option value="female">female</option>
+                    <option value="hermaphrodite">hermaphrodite</option>
+                </select>
+            </div>
+            <div class="filter">
+                <h5>film: </h5>
+                <select [(ngModel)]="filterFilm" name="films">
+                    <option value="The Phantom Menace">The Phantom Menace</option>
+                    <option value="Attack of the Clones">Attack of the Clones</option>
+                    <option value="Revenge of the Sith">Revenge of the Sith</option>
+                    <option value="A New Hope">A New Hope</option>
+                    <option value="The Empire Strikes Back">The Empire Strikes Back</option>
+                    <option value="Return of the Jedi">Return of the Jedi</option>
+
+                </select>
+            </div>
+            <button type="submit">Filter</button>
+        </form>
     </div>
         <div class="container-list">
             <div *ngFor="let people of listCast.slice(0,fristCharacters)">
                 <app-character-tile [characterize]='people'></app-character-tile>
             </div>
-            <button *ngIf="listCast.length != fristCharacters" class="btn-more" (click)="seeMore()">more ({{fristCharacters}} of {{listCast.length}})</button>
+            <button *ngIf="listCast.length != fristCharacters" class="btn-more" (click)="seeMore()">load more ({{fristCharacters}} of {{listCast.length}})</button>
         </div>
 </div>
 
@@ -19,13 +57,15 @@
 
     .castel {
         /* width: 100vh; */
-        display: flex;
+        display: block;
         padding: 0;
     }
 
     .title {
         flex: 1;
-        margin-right: 40px;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 40px;
         position: sticky;
     }
 
@@ -42,7 +82,7 @@
 
     .btn-more {
         background-color: transparent;
-        border: solid .2px rgba(255, 255, 255, 0.4);
+        border: dashed .2px rgba(255, 255, 255, 0.4);
         color: white;
         font-size: 18pt;
         cursor: pointer;
@@ -53,7 +93,35 @@
         box-shadow: 0px 0 4px 5px rgba(255, 255, 255, 0.3);
     }
 
-    
+
+    .filters{
+        display: flex;
+        height: fit-content;
+        justify-content: start;
+        align-self: end;
+    }
+    .filter{
+        display: flex;
+        margin: 0px 10px;
+    }
+    .filter h5{
+        font-size: clamp(14pt, 3em, 10%);
+        margin: 0;
+        margin: 0px 5px;
+    }
+
+    .filter select{
+        background-color: transparent;
+        color: #fff;
+        font-size: clamp(14pt, 3em, 10%);
+    }
+
+    .filter  option{
+        background-color: transparent;
+        color: #000;
+        font-size: clamp(14pt, 3em, 10%);
+    }
+
     .container-list {
         flex: 10;
         display: grid;
@@ -62,7 +130,6 @@
         grid-template-rows: repeat(auto-fill, minmax(10em, 1fr));
         grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
     }
-
 
     .load-cnt {
         display: flex;

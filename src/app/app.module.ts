@@ -8,6 +8,7 @@ import { HomeComponent } from './views/home/home.component';
 import { FilmTileComponent } from './components/film-tile/film-tile.component';
 import { CharacterTileComponent } from './components/character-tile/character-tile.component';
 import { CastComponent } from './views/cast/cast.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,9 +21,13 @@ import { CastComponent } from './views/cast/cast.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    
+    FormsModule,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { 
