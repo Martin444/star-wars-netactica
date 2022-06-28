@@ -63,10 +63,6 @@ export class CastComponent implements OnInit {
   }
 
   getFilterValues() {
-      console.log("Form Submitted")
-      console.log(this.filterEye)
-      console.log(this.filterGener)
-      console.log(this.filterFilm)
     
     if(this.filterFilm === this.filmSelect.title) {
         let respon = this.listCast.filter((people) => {
