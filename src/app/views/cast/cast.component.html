@@ -11,9 +11,10 @@
         <div>
             <h4>All the</h4>
             <h1>Cast of {{filmSelect.title}}</h1>
+
         </div>
         <!-- Filtros -->
-        <form class="filters" [target]="filterForm" (submit)="getFilterValues()">
+        <form class="filters" [target]="filterForm" (submit)="selectFilterValues()">
             <div class="filter">
                 <h5>color eyes: </h5>
                 <select [(ngModel)]="filterEye" name="filterEye" >
@@ -26,7 +27,7 @@
                 </select>
             </div>
             <div class="filter">
-                <h5>gener: </h5>
+                <h5>gender: </h5>
                 <select [(ngModel)]="filterGener" name="gener">
                     <option value="All">All</option>
                     <option value="n/a">n/a</option>
@@ -47,9 +48,10 @@
 
                 </select>
             </div>
-            <button type="submit">Filter</button>
+            <button type="submit" class="btn-filter">Filter</button>
         </form>
     </div>
+    <h3>{{resultsFilterTitle}}</h3>
         <div class="container-list" *ngIf="filterCast.length === 0">
             <div *ngFor="let people of listCast.slice(0,fristCharacters)">
                 <app-character-tile 
@@ -60,8 +62,8 @@
             </div>
             <button *ngIf="listCast.length != fristCharacters" class="btn-more" (click)="seeMore()">load more ({{fristCharacters}} of {{listCast.length}})</button>
         </div>
+
         <div *ngIf="filterCast.length !== 0">
-            <h3>{{resultsFilterTitle}}</h3>
             <div class="container-list" >
                 <div *ngFor="let people of filterCast.slice(0,fristCharacters)">
                     <app-character-tile [characterize]='people'></app-character-tile>
@@ -115,11 +117,12 @@
     .filters{
         display: flex;
         height: fit-content;
-        justify-content: start;
         align-self: end;
+        align-items: center;
     }
 
     .filter{
+        justify-content: center;
         display: flex;
         margin: 0px 10px;
     }
@@ -166,7 +169,15 @@
         justify-content: center;
     }
 
-
+    .btn-filter {
+            max-height: 30px;
+            margin: 5px 0px;
+            border: none;
+            font-size: clamp(14pt, 3em, 10%);
+            font-weight: bold;
+            color: white;
+            background-color: transparent;
+        }
     @media (max-width: 1200px) {
         .title {
             flex-direction: column;
@@ -178,7 +189,7 @@
 
         .filters{
             padding: 20px 0px;
-            align-self: start;
+            align-self: end;
         }
 
         .filter{
@@ -192,5 +203,19 @@
         }
     }
 
+    @media (max-width: 600px) {
+        .filters{
+            width: 100%;
+            display: block;
+        }
+
+        .filter{
+            flex-direction: column;
+            margin: 0;
+            margin-top: 10px;
+        }
+
+
+    }
     
 </style>

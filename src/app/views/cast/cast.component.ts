@@ -95,7 +95,8 @@ export class CastComponent implements OnInit {
       this.filterFilm = this.filmSelect.title;
   }
 
-  getFilterValues() {
+  selectFilterValues() {
+
     if(this.filterFilm === this.filmSelect.title) {
         let respon = this.listCast.filter((people) => {
           if (this.filterEye === 'All' && this.filterGener === 'All') {
@@ -105,21 +106,22 @@ export class CastComponent implements OnInit {
           } else if (this.filterEye !== 'All' && this.filterGener === 'All') {
             return people.eye_color === this.filterEye
           } else {
-            if(people.eye_color.includes(this.filterEye) && people.gender.includes(this.filterGener)) {
-              return people.eye_color.includes(this.filterEye) && people.gender.includes(this.filterGener)
+              if(people.eye_color.includes(this.filterEye) || people.gender.includes(this.filterGener)) {
+                  return people.eye_color.includes(this.filterEye) && people.gender.includes(this.filterGener)
             } else {
-              this.resultsFilterTitle = 'Characters not found, Sorry. try again!'
-              return people;
+              return null;
             }
           }
         });
+        respon.length <= 0 ? this.resultsFilterTitle=  'Characters not found, Sorry. try again!': this.resultsFilterTitle = 'Results';
+        console.log(respon.length)
         this.filterCast = respon;
     } else {
       this.isLoadPeople = true;
       this.getCastByNameEp(this.filterFilm);
     }
   }
-
+  
 
   seeMore() {
     let resume = this.listCast.length - this.fristCharacters;

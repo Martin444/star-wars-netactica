@@ -67,9 +67,13 @@ export class CastService {
 
   getOneCharacter(url: string) {
     return new Promise<any>((res, rej) => {
-      this.http.get(url).subscribe(response => {
-        res(response)
-      })
+      try {
+        this.http.get(url).subscribe(response => {
+          res(response)
+        })
+      } catch(e: any) {
+        rej(e);
+      }
     })
   }
 
