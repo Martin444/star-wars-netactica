@@ -96,7 +96,6 @@ export class CastComponent implements OnInit {
   }
 
   selectFilterValues() {
-
     if(this.filterFilm === this.filmSelect.title) {
         let respon = this.listCast.filter((people) => {
           if (this.filterEye === 'All' && this.filterGener === 'All') {
