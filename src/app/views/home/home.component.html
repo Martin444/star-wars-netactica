@@ -12,7 +12,7 @@
       <app-film-tile
         [filmInfo]="film" 
         (isSelectEpisodie)="changeCrawl($event)" 
-        [isCrawled]="thisCrawl == film.episode_id"
+        [isCrawled]="thisCrawlAnimated == film.episode_id"
         >
       </app-film-tile>
     </div>

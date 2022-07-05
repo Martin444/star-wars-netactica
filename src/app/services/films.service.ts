@@ -12,15 +12,31 @@ export class FilmsService {
   ) { }
 
   getAllFilms() {
-    return this.http.get(this.url)
+    return new Promise<any>((res, rej) => {
+      try {
+        this.http.get(this.url).subscribe((response: any) => {
+          res(response['results'])
+        });
+      } catch (error: any) {
+         rej(error)
+      }
+    })
   }
 
   getOneFilm(ep: string) {
-    return this.http.get(`${this.url}/${ep}`)
+    try {
+      return this.http.get(`${this.url}/${ep}`)
+    } catch (error: any) {
+      throw new Error(error);
+    }
   }
 
   getFilmbyName(ep: string) {
-    return this.http.get(`${this.url}/?search=${ep}`)
+    try {
+      return this.http.get(`${this.url}/?search=${ep}`)
+    } catch (error: any) {
+      throw new Error(error);
+    }
   }
 
   getOneFilmeURL(url: string) {

@@ -9,47 +9,39 @@ import { FilmsService } from 'src/app/services/films.service';
 })
 export class HomeComponent implements OnInit {
 
-  allFilmes: Filme[] = []
   isLoadingFilms = true;
+  allFilmes: Filme[] = []
 
-
-
-  thisCrawl = '0';
-
-
-  changeCrawl(epid: string) {
-    if(epid === this.thisCrawl) {
-      this.thisCrawl = '0'
-    } else {
-      this.thisCrawl = epid;
-    }
-  }
-
+  thisCrawlAnimated = '0';
 
   constructor(
     private filmServices: FilmsService
   ) { }
 
-  getFilmesOfService(): Filme[] {
+
+  ngOnInit(): void {
+    this.getAllFilmes();
+  }
+
+  async getAllFilmes(): Promise<Filme[]> {
     try {
-      this.filmServices.getAllFilms().subscribe((resp: any) => {
-        this.isLoadingFilms = false;
-        let respon = resp['results'].sort((e: any, t: any) => 0 - (e.episode_id > t.episode_id ? -1 : 1))
-        respon.map((e: any)=>{
+      let respFilms = await this.filmServices.getAllFilms();
+      let filmsOrder = respFilms.sort((e: any, t: any) => 0 - (e.episode_id > t.episode_id ? -1 : 1))
+        filmsOrder.map((e: any)=>{
           this.allFilmes.push(e)
         })
-      })
+      this.isLoadingFilms = false;
       return this.allFilmes;
     } catch (error: any) {
       throw catchError(error.Observable)
     }
-
   }
 
-
-  ngOnInit(): void {
-    this.getFilmesOfService();
-
+  changeCrawl(epid: string) {
+    if(epid === this.thisCrawlAnimated) {
+      this.thisCrawlAnimated = '0'
+    } else {
+      this.thisCrawlAnimated = epid;
+    }
   }
-
 }
